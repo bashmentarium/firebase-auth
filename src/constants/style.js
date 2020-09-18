@@ -9,6 +9,9 @@ export default StyleSheet.create({
   },
   form: {
     width: '90%',
+    borderWidth: 1,
+    borderColor: 'gray',
+    padding: 10,
   },
   label: {
     fontSize: 20,
