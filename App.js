@@ -11,7 +11,6 @@ export default function App() {
   useEffect(() => {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig)
-    firebase.analytics()
   }, [])
 
   return (
