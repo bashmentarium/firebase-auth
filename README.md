@@ -11,4 +11,5 @@ Allows you to log into the application by providing your telephone number that s
 
 # Text message with the one-time password
 Use it to authenticate yourself into the app.
+
 ![](Message.png)
