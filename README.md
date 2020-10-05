@@ -1,5 +1,8 @@
 # Firebase-auth
 
+To be used coupled with https://github.com/bashmentarium/firebase-serverless-auth-functions
+
+
 The application has two forms:
 1. Sign up form
 Allows you to sign up into the application by providing your telephone number. The telephone number is used to send you back a message with a one-time authentication password.
