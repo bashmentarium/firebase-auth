@@ -76,7 +76,7 @@ const SignUpForm = () => {
                   keyboardType='numeric'
                 />
                 <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-                  <Text style={styles.buttonTitle}>Register</Text>
+                  <Text style={styles.buttonTitle}>Sign up</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -116,7 +116,7 @@ const SignUpForm = () => {
                   keyboardType='numeric'
                 />
                 <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-                  <Text style={styles.buttonTitle}>Log In</Text>
+                  <Text style={styles.buttonTitle}>Sign In</Text>
                 </TouchableOpacity>
               </View>
             )}
