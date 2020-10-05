@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React, {useState} from 'react'
+import {View, Text, TouchableOpacity} from 'react-native'
 import {Formik} from 'formik'
 import {Input, Button} from 'react-native-elements'
 import axios from 'axios'
@@ -10,6 +10,9 @@ import styles from '../constants/style'
 const ROOT_URL = 'https://us-central1-otpa-ebded.cloudfunctions.net'
 
 const SignUpForm = () => {
+  const [isSignedUp, setIsSignedUp] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   const submitSignUp = async (values) => {
     try {
       await axios.post(`${ROOT_URL}/createUser`, {phone: values.phone})
@@ -20,6 +23,8 @@ const SignUpForm = () => {
     } catch (err) {
       console.log(err)
     }
+
+    setIsSignedUp(true)
   }
 
   const submitLogin = async (values) => {
@@ -33,6 +38,8 @@ const SignUpForm = () => {
     } catch (err) {
       console.log(err)
     }
+
+    setIsLoggedIn(true)
   }
 
   return (
@@ -43,17 +50,36 @@ const SignUpForm = () => {
       >
         {({handleChange, handleBlur, handleSubmit, values}) => (
           <>
-            <Text style={{...styles.label, color: 'red'}}>Sign up</Text>
-            <View style={styles.form}>
-              <Text style={styles.label}>Enter your phone number</Text>
-              <Input
-                onChangeText={handleChange('phone')}
-                onBlur={handleBlur('phone')}
-                value={values.phone}
-                style={styles.input}
-              />
-              <Button onPress={handleSubmit} title='Submit' />
-            </View>
+            <Text style={styles.formLabel}>Sign up</Text>
+            {isSignedUp ? (
+              <View
+                style={{
+                  ...styles.form,
+                  height: 150,
+                }}
+              >
+                <Text style={{...styles.buttonTitle, color: 'green'}}>
+                  Successfuly signed up!
+                </Text>
+                <Text style={{...styles.buttonTitle, textAlign: 'center'}}>
+                  Use your phone number and the recieved code to login
+                </Text>
+              </View>
+            ) : (
+              <View style={{...styles.form, height: 150}}>
+                <Text style={styles.label}>Enter your phone number</Text>
+                <Input
+                  onChangeText={handleChange('phone')}
+                  onBlur={handleBlur('phone')}
+                  value={values.phone}
+                  style={styles.input}
+                  keyboardType='numeric'
+                />
+                <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+                  <Text style={styles.buttonTitle}>Register</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </>
         )}
       </Formik>
@@ -64,26 +90,36 @@ const SignUpForm = () => {
       >
         {({handleChange, handleBlur, handleSubmit, values}) => (
           <>
-            <Text style={{...styles.label, color: 'red', marginTop: 50}}>
-              Sign in
-            </Text>
-            <View style={styles.form}>
-              <Text style={styles.label}>Phone number</Text>
-              <Input
-                onChangeText={handleChange('phone2')}
-                onBlur={handleBlur('phone2')}
-                value={values.phone2}
-                style={styles.input}
-              />
-              <Text style={styles.label}>Code</Text>
-              <Input
-                onChangeText={handleChange('code')}
-                onBlur={handleBlur('code')}
-                value={values.code}
-                style={styles.input}
-              />
-              <Button onPress={handleSubmit} title='Submit' />
-            </View>
+            <Text style={{...styles.formLabel, marginTop: 20}}>Sign in</Text>
+            {isLoggedIn ? (
+              <View style={{...styles.form, height: 350}}>
+                <Text style={{...styles.buttonTitle, color: 'green'}}>
+                  Successfuly logged in!
+                </Text>
+              </View>
+            ) : (
+              <View style={{...styles.form, height: 240}}>
+                <Text style={styles.label}>Phone number</Text>
+                <Input
+                  onChangeText={handleChange('phone2')}
+                  onBlur={handleBlur('phone2')}
+                  value={values.phone2}
+                  style={styles.input}
+                  keyboardType='numeric'
+                />
+                <Text style={styles.label}>Code</Text>
+                <Input
+                  onChangeText={handleChange('code')}
+                  onBlur={handleBlur('code')}
+                  value={values.code}
+                  style={styles.input}
+                  keyboardType='numeric'
+                />
+                <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+                  <Text style={styles.buttonTitle}>Log In</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </>
         )}
       </Formik>
